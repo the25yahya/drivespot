@@ -1,10 +1,10 @@
 import React from 'react'
-
+import Header from './components/home/Header'
 
 function App() {
   return (
     <div>
-      <p>App</p>
+      <Header/>
     </div>
   )
 }
