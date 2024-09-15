@@ -1,0 +1,203 @@
+{
+    "carDetails":[
+        {
+            "label":"Listing Title",
+            "name":"listingTitle",
+            "fieldType":"text",
+            "required":true,
+            "column":2,
+            "icon":"FaClipboradList"
+        },
+        {
+            "label":"Tag Line",
+            "name":"tagLine",
+            "fieldType":"text",
+            "column":2,
+            "icon":"FaTag"
+        },
+        {
+            "label":"Original Price",
+            "name":"originalPrice",
+            "fieldType":"text",
+            "required":true,
+            "column":2,
+            "icon":"FaClipboradList"
+        },
+        {
+            "label":"Selling Price",
+            "name":"sellingPrice",
+            "fieldType":"text",
+            "required":true,
+            "column":2,
+            "icon":"FaClipboradList"
+        },
+        {
+            "label":"Brand",
+            "name":"brand",
+            "fieldType":"text",
+            "required":true,
+            "column":1,
+            "icon":"FaClipboradList"
+        },
+        {
+            "label":"Year",
+            "name":"year",
+            "fieldType":"number",
+            "required":true,
+            "column":2,
+            "icon":"FaClipboradList"
+        },
+        {
+            "label":"Engine Size",
+            "name":"engineSize",
+            "fieldType":"text",
+            "column":2,
+            "icon":"FaClipboradList"
+        },
+        {
+            "label":"Cylinder",
+            "name":"cylinder",
+            "fieldType":"text",
+            "column":2,
+            "icon":"FaClipboradList"
+        },
+        {
+            "label":"Mileage",
+            "name":"mileage",
+            "fieldType":"number",
+            "column":2,
+            "icon":"FaClipboradList"
+        },
+        {
+            "label":"Condition",
+            "name":"condition",
+            "fieldType":"dropdown",
+            "options":["bad","acceptable","good","great","new"],
+            "column":2,
+            "icon":"FaClipboradList"
+        },
+        {
+            "label":"Type",
+            "name":"type",
+            "fieldType":"dropdown",
+            "options":["suv","sport car","electric car","sedan","hatchback","truck","convertible"],
+            "column":2,
+            "icon":"FaClipboradList"
+        },
+        {
+            "label":"Fuel Type",
+            "name":"fuelType",
+            "fieldType":"dropdown",
+            "options":["Gasoline","Diesel","electric"],
+            "column":2,
+            "icon":"FaClipboradList"
+        },
+        {
+            "label":"Color",
+            "name":"color",
+            "fieldType":"dropdown",
+            "options":["red","black","blue","green","white","grey","yellow","pink"],
+            "column":2,
+            "icon":"FaClipboradList"
+        },
+        {
+            "label":"VIN",
+            "name":"vin",
+            "fieldType":"text",
+            "column":1,
+            "icon":"FaClipboradList"
+        },
+        {
+            "label":"Listing Description",
+            "name":"listingDescription",
+            "fieldType":"textarea",
+            "options":["red","black","blue","green","white","grey","yellow","pink"],
+            "column":2,
+            "icon":"FaClipboradList"
+        }
+        
+
+    ],
+"features": [
+    {
+      "label": "Air Conditioner",
+      "name": "airConditioner",
+      "fieldType": "checkbox"
+    },
+    {
+      "label": "Leather Seats",
+      "name": "leatherSeats",
+      "fieldType": "checkbox"
+    },
+    {
+      "label": "Sunroof",
+      "name": "sunroof",
+      "fieldType": "checkbox"
+    },
+    {
+      "label": "Bluetooth Connectivity",
+      "name": "bluetoothConnectivity",
+      "fieldType": "checkbox"
+    },
+    {
+      "label": "Backup Camera",
+      "name": "backupCamera",
+      "fieldType": "checkbox"
+    },
+    {
+      "label": "Cruise Control",
+      "name": "cruiseControl",
+      "fieldType": "checkbox"
+    },
+    {
+      "label": "Power Windows",
+      "name": "powerWindows",
+      "fieldType": "checkbox"
+    },
+    {
+      "label": "GPS Navigation",
+      "name": "gpsNavigation",
+      "fieldType": "checkbox"
+    },
+    {
+      "label": "Heated Seats",
+      "name": "heatedSeats",
+      "fieldType": "checkbox"
+    },
+    {
+      "label": "Keyless Entry",
+      "name": "keylessEntry",
+      "fieldType": "checkbox"
+    },
+    {
+      "label": "Alloy Wheels",
+      "name": "alloyWheels",
+      "fieldType": "checkbox"
+    },
+    {
+      "label": "Remote Start",
+      "name": "remoteStart",
+      "fieldType": "checkbox"
+    },
+    {
+      "label": "Blind Spot Monitoring",
+      "name": "blindSpotMonitoring",
+      "fieldType": "checkbox"
+    },
+    {
+      "label": "Lane Departure Warning",
+      "name": "laneDepartureWarning",
+      "fieldType": "checkbox"
+    },
+    {
+      "label": "Automatic Emergency Braking",
+      "name": "automaticEmergencyBraking",
+      "fieldType": "checkbox"
+    },
+    {
+      "label": "Parking Sensors",
+      "name": "parkingSensors",
+      "fieldType": "checkbox"
+    }
+  ]
+}
