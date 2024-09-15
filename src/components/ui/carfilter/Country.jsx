@@ -6,20 +6,24 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
+import { Country } from '@/data/carfilter'
 
-function Country() {
+function Countryfilter() {
   return (
     <Select>
     <SelectTrigger className="w-[120px] h-[40px] bg-white border-none">
-        <SelectValue placeholder="Brand" />
+        <SelectValue placeholder="Country" />
     </SelectTrigger>
     <SelectContent>
         <SelectItem value="light">Light</SelectItem>
-        <SelectItem value="dark">Dark</SelectItem>
-        <SelectItem value="system">System</SelectItem>
+        {Country.map((item)=>{
+          return(
+              <SelectItem key={item.id} value={item.Country}>{item.Country}</SelectItem>
+          )
+        })}
     </SelectContent>
     </Select> 
   )
 }
 
-export default Country
+export default Countryfilter

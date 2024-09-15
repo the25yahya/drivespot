@@ -6,20 +6,23 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
+import { Year } from '@/data/carfilter'
 
-function Year() {
+function Yearfilter() {
   return (
     <Select>
     <SelectTrigger className="w-[120px] h-[40px] bg-white border-none">
-        <SelectValue placeholder="Brand" />
+        <SelectValue placeholder="Year" />
     </SelectTrigger>
     <SelectContent>
-        <SelectItem value="light">Light</SelectItem>
-        <SelectItem value="dark">Dark</SelectItem>
-        <SelectItem value="system">System</SelectItem>
+        {Year.map((item)=>{
+          return(
+            <SelectItem key={item.id} value={item.Year}>{item.Year}</SelectItem>
+          )
+        })}
     </SelectContent>
     </Select>
   )
 }
 
-export default Year
+export default Yearfilter

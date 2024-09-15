@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "type": "suv",
+        "img": "https://cdn-icons-png.flaticon.com/128/3097/3097137.png"
+    },
+    {
+        "id": 2,
+        "type": "electric",
+        "img": "https://cdn-icons-png.flaticon.com/128/4564/4564336.png"
+    },
+    {
+        "id": 3,
+        "type": "sport",
+        "img": "https://cdn-icons-png.flaticon.com/128/2736/2736933.png"
+    },
+    {
+        "id": 4,
+        "type": "convertible",
+        "img": "https://cdn-icons-png.flaticon.com/128/2736/2736840.png"
+    },
+    {
+        "id": 5,
+        "type": "Van",
+        "img":"https://cdn-icons-png.flaticon.com/128/5814/5814865.png"
+    },
+    {
+        "id": 6,
+        "type": "hatchback",
+        "img":"https://cdn-icons-png.flaticon.com/128/7281/7281655.png"
+    },
+    {
+        "id": 7,
+        "type":"truck",
+        "img": "https://cdn-icons-png.flaticon.com/128/819/819438.png"
+    }
+]

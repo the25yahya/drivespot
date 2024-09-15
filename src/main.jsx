@@ -1,13 +1,25 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
+import App from './home/index.jsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ClerkProvider } from '@clerk/clerk-react'
+import Profile from './profile/index.jsx'
+import AddListing from './add-listing/index.jsx'
+
+
 const router = createBrowserRouter([
   {
     path:'',
     element: <App/>
+  },
+  {
+    path:'/profile',
+    element:<Profile />
+  },
+  {
+    path:'/add-listing',
+    element: <AddListing />
   }
 ])
 

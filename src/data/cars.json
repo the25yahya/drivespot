@@ -1,0 +1,29 @@
+[
+    {
+        "id":1,
+        "img":"https://www.bmwhk.com/content/dam/bmw/common/all-models/m-series/m2-coupe/2022/Navigation/bmw-m-series-m2-coupe-lci-modelfinder.png",
+        "name": "BMW M2 Coupé",
+        "type":"sedan",
+        "tag":"Best Seller",
+        "price":"$255.000",
+        "brand": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/1200px-BMW.svg.png"
+    },
+    {
+        "id": 2,
+        "img": "https://www.hyundai.com/content/dam/hyundai/ma/fr/data/vehicle-thumbnail/product/nouvelle-elantra-hybrid/default/Elantra-668-362.png",
+        "name": "Hyundai maroc-berlin",
+        "type":"sedan",
+        "tag": "Test Drive",
+        "price":"$26.000",
+        "brand": "https://logo-marque.com/wp-content/uploads/2021/03/Hyundai-Logo.png"
+    },
+    {
+        "id": 3,
+        "img": "https://di-uploads-pod14.dealerinspire.com/hondaeastcincy/uploads/2023/12/2312-Pilot-SUV-Lineup-Comp.webp",
+        "name": "Honda SUV 2024",
+        "type": "SUV",
+        "tag": "New",
+        "brand": "https://i.pinimg.com/originals/7f/1e/ce/7f1ecec019caa2531d35a6c5d756cf73.png",
+        "price": "$33.000"
+    }
+]

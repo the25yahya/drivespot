@@ -10,13 +10,12 @@ import {
 function DownPayement() {
   return (
     <Select>
-    <SelectTrigger className="w-[120px] h-[40px] bg-white border-none">
-        <SelectValue placeholder="Brand" />
+    <SelectTrigger className="w-[120px] h-[40px] px-2 bg-white border-none">
+        <SelectValue placeholder="Down Payement" />
     </SelectTrigger>
     <SelectContent>
-        <SelectItem value="light">Light</SelectItem>
-        <SelectItem value="dark">Dark</SelectItem>
-        <SelectItem value="system">System</SelectItem>
+        <SelectItem value="Down Payement">Down Payement</SelectItem>
+        <SelectItem value="No Down Payement">No Down Payement</SelectItem>
     </SelectContent>
     </Select> 
   )

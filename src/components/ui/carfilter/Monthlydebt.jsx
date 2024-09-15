@@ -10,13 +10,12 @@ import {
 function Monthlydebt() {
   return (
     <Select>
-    <SelectTrigger className="w-[120px] h-[40px] bg-white border-none">
-        <SelectValue placeholder="Brand" />
+    <SelectTrigger className="px-2 w-[120px] h-[40px] bg-white border-none">
+        <SelectValue placeholder="Monthly Debt" />
     </SelectTrigger>
     <SelectContent>
-        <SelectItem value="light">Light</SelectItem>
-        <SelectItem value="dark">Dark</SelectItem>
-        <SelectItem value="system">System</SelectItem>
+        <SelectItem value="Monthly Debt">Monthly Debt</SelectItem>
+        <SelectItem value="No Monthly Debt">No Monthly Debt</SelectItem>
     </SelectContent>
     </Select> 
   )
