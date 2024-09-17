@@ -47,6 +47,7 @@ function App() {
           {cars.map((car)=>{
             return(
               <CarComponent
+              key = {car.name}
               brand = {car.brand}
               name = {car.name}
               img = {car.img}

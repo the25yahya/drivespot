@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Header from '@/components/home/Header'
 import InputField from '@/components/add-listing/InputField'
 import addlisting from '../data/add-listing.json'
@@ -6,40 +6,73 @@ import DropDown from '@/components/add-listing/DropDown'
 import TextArea from '@/components/add-listing/TextArea'
 import { Separator } from "@/components/ui/separator"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Hand } from 'lucide-react'
-
+import { Await } from 'react-router-dom'
+import { db } from '../../configs'
+import { CarListing } from '../../configs/schema'
+import IconField from '@/components/add-listing/IconField'
+import ImageUpload from '@/components/add-listing/ImageUpload'
 
 function AddListing() {
+  const formRef = useRef(null);
   const [formData,setformData] = useState([])
+  const [featuresData,setFeaturesData] = useState([])
   const HandleInputChange = (name,value) =>{
     setformData((prevData)=>({
       ...prevData,
       [name]:value
     }))
   }
-  console.log(formData);
+
+  const HandleFeaturesChange = (name,value)=>{
+    setFeaturesData((prevData)=>({
+      ...prevData,
+      [name]:value
+    }))    
+  }
+
+  const onSubmit = async(e)=>{
+    e.preventDefault()
+    if (formRef.current.checkValidity()) {
+      try{
+        const result = await db.insert(CarListing).values({
+          ...formData,
+          features:featuresData
+        });
+        if (result){
+          console.log("data saved successfully");
+        }
+      }catch(e){
+        console.log("ERROR INSERTING DATA",e);
+  
+      }
+    }else {
+      alert("Form is invalid. Please correct the errors and try again.");
+    }
+    
+  }
   
   return (
     <div>
       <Header/>
       <div className='px-10 md:px-20 py-32'>
         <h2 className='text-4xl font-bold'>Add New Listing</h2>
-        <form action="" className='p-10 border rounded-xl mt-10'>
+        <form ref={formRef} action="" className='p-10 border rounded-xl mt-10'>
           <div>
             <h2 className='text-2xl font-medium mb-6'>Car Details</h2>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-5 px-10'>
               {addlisting.carDetails.map((item,index)=>{return(
-                                <div key={index}>
+                                <div key={item.name || index}>
                                 <label className='mb-2 font-semibold' htmlFor="">
+                                    <IconField icon={item?.icon} />
                                     {item.label} {item.required && <span className='text-red-500'>*</span>}
                                 </label>
                                 {
                                   item.fieldType === 'text' || item.fieldType === 'number' ? (
                                     <InputField HandleInputChange={HandleInputChange} item={item} />
                                   ) : item.fieldType === 'dropdown' ? (
-                                    <DropDown item={item} />
+                                    <DropDown HandleInputChange={HandleInputChange} item={item} />
                                   ) : item.fieldType === 'textarea' ? (
-                                    <TextArea item={item} />
+                                    <TextArea HandleInputChange={HandleInputChange} item={item} />
                                   ) : null
                                 }
                               </div>
@@ -54,17 +87,22 @@ function AddListing() {
                   {addlisting.features.map((item,index)=>{
                     return(
                       <div className='flex items-center gap-2 my-1' key={index}>
-                        <Checkbox />
+                        <Checkbox onCheckedChange={(value)=>HandleFeaturesChange(item.name,value)
+                        } />
                         <h2>{item.label}</h2>
                       </div>
                     )
                   })}
                 </div>
             </div>
+            <Separator className="my-10" />
+            <div>
+              <ImageUpload/>
+            </div>
 
 
             <div className='w-full flex justify-end'>
-                <button className='bg-indigo-900 text-white px-5 py-2 rounded-lg hover:bg-transparent hover:text-indigo-900'>Submit</button>
+                <button type='submit' onClick={(e)=>onSubmit(e)} className='bg-indigo-900 text-white px-5 py-2 rounded-lg hover:bg-transparent hover:text-indigo-900'>Submit</button>
             </div>
          
         </form>

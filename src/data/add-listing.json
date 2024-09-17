@@ -74,6 +74,7 @@
             "fieldType":"dropdown",
             "options":["bad","acceptable","good","great","new"],
             "column":2,
+            "required":true,
             "icon":"FaClipboradList"
         },
         {
@@ -87,6 +88,7 @@
         {
             "label":"Fuel Type",
             "name":"fuelType",
+            "required":true,
             "fieldType":"dropdown",
             "options":["Gasoline","Diesel","electric"],
             "column":2,
@@ -95,6 +97,7 @@
         {
             "label":"Color",
             "name":"color",
+            "required":true,
             "fieldType":"dropdown",
             "options":["red","black","blue","green","white","grey","yellow","pink"],
             "column":2,
