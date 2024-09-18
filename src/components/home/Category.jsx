@@ -1,9 +1,7 @@
 import React from 'react'
 import categories from '../../data/category.json'
 
-function Category() {
-    console.log(categories);
-    
+function Category() {    
   return (
     <div className='text-center mt-20'>
         <h1 className='text-3xl font-semibold my-10'>Browse by Type</h1>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Header from '@/components/home/Header'
 import InputField from '@/components/add-listing/InputField'
 import addlisting from '../data/add-listing.json'
@@ -6,16 +6,50 @@ import DropDown from '@/components/add-listing/DropDown'
 import TextArea from '@/components/add-listing/TextArea'
 import { Separator } from "@/components/ui/separator"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Await } from 'react-router-dom'
+import { Await, useNavigate, useSearchParams } from 'react-router-dom'
 import { db } from '../../configs'
-import { CarListing } from '../../configs/schema'
+import { CarImgs, CarListing } from '../../configs/schema'
 import IconField from '@/components/add-listing/IconField'
 import ImageUpload from '@/components/add-listing/ImageUpload'
+import { BiLoaderAlt } from "react-icons/bi";
+import { toast } from 'sonner'
+import { useUser } from '@clerk/clerk-react'
+import { eq } from 'drizzle-orm'
+import Service from '@/data/Service'
+
 
 function AddListing() {
+  const {user} = useUser();
   const formRef = useRef(null);
-  const [formData,setformData] = useState([])
-  const [featuresData,setFeaturesData] = useState([])
+  const [formData,setformData] = useState([]);
+  const [featuresData,setFeaturesData] = useState([]);
+  const [triggerUploadImage,setTriggerUploadImage] = useState('');
+  const [loader,setLoader] = useState(false);
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const [carEditInfo,setCarEditInfo] = useState([])
+
+  //get the url query params
+  const mode = searchParams.get('mode')
+  const id = searchParams.get('id')
+
+  useEffect(()=>{
+    if (mode=='edit') {
+      getCarListingDetail()
+    }
+  },[])
+
+  const getCarListingDetail = async() => {
+    const result =await db.select().from(CarListing)
+    .innerJoin(CarImgs,eq(CarListing.id,CarImgs.CarListingId))
+    .where(eq(CarListing.id,id))
+    const resp=Service.FormatResult(result)
+    setCarEditInfo(resp[0]);
+    console.log(carEditInfo);
+    
+    
+  }
+
   const HandleInputChange = (name,value) =>{
     setformData((prevData)=>({
       ...prevData,
@@ -30,23 +64,51 @@ function AddListing() {
     }))    
   }
 
+
   const onSubmit = async(e)=>{
+    setLoader(true)
+    toast('Please Wait while the server is proccessing your request ...')
     e.preventDefault()
-    if (formRef.current.checkValidity()) {
-      try{
-        const result = await db.insert(CarListing).values({
-          ...formData,
-          features:featuresData
-        });
-        if (result){
-          console.log("data saved successfully");
+    if (mode=='edit') {
+      if (formRef.current.checkValidity()) {
+        try{
+          const result = await db.update(CarListing).set({
+            ...formData,
+            createdBy:user.primaryEmailAddress?.emailAddress,
+            features:featuresData
+          }).where(eq(CarListing.id,id)).returning({id:CarListing.id})
+          if (result){
+            setLoader(false)
+            setTriggerUploadImage(result[0].id);
+            navigate('/profile')
+          }
+        }catch(e){
+          console.log("ERROR INSERTING DATA",e);
+    
         }
-      }catch(e){
-        console.log("ERROR INSERTING DATA",e);
-  
+      }else {
+        alert("Form is invalid. Please correct the errors and try again.");
       }
-    }else {
-      alert("Form is invalid. Please correct the errors and try again.");
+
+    }else{
+      if (formRef.current.checkValidity()) {
+        try{
+          const result = await db.insert(CarListing).values({
+            ...formData,
+            createdBy:user.primaryEmailAddress?.emailAddress,
+            features:featuresData
+          }).returning({id:CarListing.id});
+          if (result){
+            setLoader(false)
+            setTriggerUploadImage(result[0].id);
+          }
+        }catch(e){
+          console.log("ERROR INSERTING DATA",e);
+    
+        }
+      }else {
+        alert("Form is invalid. Please correct the errors and try again.");
+      }
     }
     
   }
@@ -97,12 +159,22 @@ function AddListing() {
             </div>
             <Separator className="my-10" />
             <div>
-              <ImageUpload/>
+              <ImageUpload
+               setLoader={(v)=>{setLoader(v);navigate('/profile')}} 
+               triggerUploadImage={triggerUploadImage}
+               carEditInfo={carEditInfo}
+               />
             </div>
 
 
             <div className='w-full flex justify-end'>
-                <button type='submit' onClick={(e)=>onSubmit(e)} className='bg-indigo-900 text-white px-5 py-2 rounded-lg hover:bg-transparent hover:text-indigo-900'>Submit</button>
+                <button
+                type='submit'
+                onClick={(e)=>onSubmit(e)}
+                disabled={loader}
+                className='bg-indigo-900 text-white px-5 py-2 rounded-lg hover:bg-transparent hover:text-indigo-900'>
+                    {loader?<BiLoaderAlt className='animate-spin'/>:'Submit'}
+                </button>
             </div>
          
         </form>

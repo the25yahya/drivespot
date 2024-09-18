@@ -2,6 +2,7 @@ import { pgTable, serial, text, integer, varchar, numeric, boolean, json } from 
 
 export const CarListing = pgTable('carListing',{
     id: serial('id').primaryKey(),
+    createdBy: varchar('createdBy').notNull(),
     listingTitle: varchar('listingTitle').notNull(),
     tagLine: varchar('tagLine'),
     originalPrice: numeric('originalPrice').notNull(),
@@ -11,11 +12,21 @@ export const CarListing = pgTable('carListing',{
     engineSize: varchar('engineSize'),
     cylinder: varchar('cylinder'),
     mileage: integer('mileage'),
-    condition: text('condition').notNull(), // Use ENUM or text for options like 'bad', 'acceptable', etc.
-    type: text('type').notNull(), // Use ENUM or text for options like 'suv', 'sport car', etc.
-    fuelType: text('fuelType').notNull(), // Use ENUM or text for options like 'Gasoline', 'Diesel', etc.
-    color: text('color').notNull(), // Use ENUM or text for color options
+    condition: text('condition').notNull(), 
+    type: text('type').notNull(), 
+    fuelType: text('fuelType').notNull(), 
+    color: text('color').notNull(), 
     vin: varchar('vin'),
     listingDescription: text('listingDescription'),
     features:json('features')
+})
+
+export const CarImgs = pgTable('CarImgs',{
+    id: serial('id').primaryKey(),
+    imageUrl: varchar('imageUrl').notNull(),
+    CarListingId: integer('CarListingId').notNull().references(()=>CarListing.id) 
+})
+
+export const carInventory = pgTable('carInventory',{
+
 })

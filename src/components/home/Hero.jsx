@@ -10,7 +10,7 @@ import { MdChevronRight } from "react-icons/md";
 
 function Hero() {
   return (
-    <div className='md:flex items-center gap-16 p-10 justify-center py-28 bg-slate-100'>
+    <div className='fade-in md:flex items-center gap-16 p-10 justify-center py-28 bg-slate-100'>
         <div className='text-center mt-10 md:mt-0'>    
             <div>
                 <img className='w-[550px]' src={cars} alt="" />

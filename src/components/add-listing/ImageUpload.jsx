@@ -1,10 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MdCloudUpload } from "react-icons/md";
 import { IoMdCloseCircle } from "react-icons/io";
 import { storage } from '../../../configs/firebaseConfig';
 import { uploadBytes,ref, getDownloadURL } from 'firebase/storage';
+import { CarImgs } from '../../../configs/schema';
+import { db } from '../../../configs'
 
-function ImageUpload() {
+function ImageUpload({triggerUploadImage,setLoader}) {
+
+    useEffect(()=>{
+        if (triggerUploadImage) {
+            UploadImages();
+        }
+    },[triggerUploadImage])
+
     const [selectedFileList,setSelectedFileList]=useState([]);
 
     const OnFileSelected = (e)=>{
@@ -20,24 +29,44 @@ function ImageUpload() {
     }
 
 
-    const UploadImages = () => {
-        selectedFileList.forEach((file)=>{
-            const fileName = Date.now()+'.jpeg';
-            const storageRef = ref(storage,'drivespot-carImgs/'+fileName);
-            const metaData = {
-                ContentType : 'image/jpeg'
-            }
-            uploadBytes(storageRef,file,metaData).then((snapShot)=>{
-                console.log('file uploaded successfully');
-                
-            }).then((res)=>{
-                getDownloadURL(storageRef).then(async(downloadUrl)=>{
-                    console.log(downloadUrl);
-                    
-                })
-            })
-        })
-    }
+    const UploadImages = async () => {
+        console.log("trigger: ", triggerUploadImage);
+        setLoader(true);
+      
+        const uploadTasks = selectedFileList.map(async (file) => {
+          const fileName = Date.now() + '.jpeg';
+          const storageRef = ref(storage, 'drivespot-carImgs/' + fileName);
+          const metaData = {
+            ContentType: 'image/jpeg',
+          };
+      
+          try {
+            // Upload file to Firebase Storage
+            const snapShot = await uploadBytes(storageRef, file, metaData);
+            console.log('File uploaded successfully:', snapShot);
+      
+            // Get the download URL
+            const downloadUrl = await getDownloadURL(storageRef);
+            console.log('Download URL:', downloadUrl);
+      
+            // Insert into database
+            await db.insert(CarImgs).values({
+              imageUrl: downloadUrl,
+              CarListingId: triggerUploadImage,
+            });
+            console.log("Image saved successfully to DB.");
+          } catch (error) {
+            console.error('Error uploading image:', error);
+          }
+        });
+      
+        // Wait for all uploads to complete
+        await Promise.all(uploadTasks);
+      
+        // Set loader to false once all uploads are done
+        setLoader(false);
+      };
+      
 
   return (
     <div className='my-20'>

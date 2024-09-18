@@ -1,19 +1,34 @@
 import React from 'react'
 import Header from '@/components/home/Header'
 import { Link } from 'react-router-dom'
+import MyListing from '@/components/myListing/MyListing'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Separator } from "@/components/ui/separator"
 
 
 function Profile() {
   return (
     <div>
         <Header />
-        <div className='pt-32'>
-            <div className='flex items-center justify-between px-10'>
-                <h2 className='text-xl font-bold'>My Listing</h2>
-                <Link to='/add-listing'>
-                    <button className='bg-indigo-900 text-white hover:bg-transparent hover:text-indigo-900 transition rounded-lg px-4 py-1'>+ Add New Listing</button>
-                </Link>
-            </div>
+        <div className='pt-32 px-10 md:px-20'>
+            <Tabs defaultValue="MyListing" className="w-full">
+              <TabsList>
+                <TabsTrigger value="MyListing">MyListing</TabsTrigger>
+                <TabsTrigger value="Inbox">Inbox</TabsTrigger>
+                <TabsTrigger value="Profile">Profile</TabsTrigger>
+              </TabsList>
+              <Separator className='my-6' />
+              <TabsContent value="MyListing">
+                <MyListing />
+              </TabsContent>
+              <TabsContent value="Inbox">
+                Inbox Tab
+              </TabsContent>
+              <TabsContent value="Profile">
+                Profile Tab
+              </TabsContent>
+              <TabsContent value="password">Change your password here.</TabsContent>
+            </Tabs>
         </div>
     </div>
   )

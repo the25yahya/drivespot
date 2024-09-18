@@ -83,6 +83,7 @@
             "fieldType":"dropdown",
             "options":["suv","sport car","electric car","sedan","hatchback","truck","convertible"],
             "column":2,
+            "required":true,
             "icon":"FaClipboradList"
         },
         {
