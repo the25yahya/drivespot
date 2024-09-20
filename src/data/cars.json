@@ -5,7 +5,7 @@
         "name": "BMW M2 Coupé",
         "type":"sedan",
         "tag":"Best Seller",
-        "price":"$255.000",
+        "price":"255.000",
         "brand": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/1200px-BMW.svg.png"
     },
     {
@@ -14,7 +14,7 @@
         "name": "Hyundai maroc-berlin",
         "type":"sedan",
         "tag": "Test Drive",
-        "price":"$26.000",
+        "price":"26.000",
         "brand": "https://logo-marque.com/wp-content/uploads/2021/03/Hyundai-Logo.png"
     },
     {
@@ -24,6 +24,6 @@
         "type": "SUV",
         "tag": "New",
         "brand": "https://i.pinimg.com/originals/7f/1e/ce/7f1ecec019caa2531d35a6c5d756cf73.png",
-        "price": "$33.000"
+        "price": "33.000"
     }
 ]

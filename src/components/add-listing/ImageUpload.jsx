@@ -5,8 +5,13 @@ import { storage } from '../../../configs/firebaseConfig';
 import { uploadBytes,ref, getDownloadURL } from 'firebase/storage';
 import { CarImgs } from '../../../configs/schema';
 import { db } from '../../../configs'
+import { useSearchParams } from 'react-router-dom';
 
 function ImageUpload({triggerUploadImage,setLoader}) {
+    const [searchParams] = useSearchParams();
+    const mode = searchParams.get('mode')
+    console.log(mode);
+    
 
     useEffect(()=>{
         if (triggerUploadImage) {

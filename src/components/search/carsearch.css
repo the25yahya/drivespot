@@ -1,0 +1,3 @@
+.cropped-image {
+    object-fit: cover; /* Crops the image to fit the container while preserving aspect ratio */
+}

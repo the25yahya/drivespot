@@ -1,9 +1,13 @@
 import { FaClipboardList,FaTag,FaMoneyBillAlt,FaMoneyBill,FaCar,
-FaCheckCircle,FaChargingStation,
-FaIndustry,FaCarSide,
-FaCalendarAlt,FaRoad,FaCogs,FaGasPump,FaPallet,FaDoorClosed,FaIdCard,FaTags
+FaCarSide,
+FaCalendarAlt,FaRoad,FaCogs,FaGasPump,FaPallet,FaDoorClosed,FaIdCard,FaTags,FaQuestion 
  } from "react-icons/fa";
-
+ import { MdOutlineDriveFileRenameOutline } from "react-icons/md";
+ import { GiSteeringWheel } from "react-icons/gi";
+ import { SiCoronaengine } from "react-icons/si";
+ import { BiSolidCylinder } from "react-icons/bi";
+ import { IoIosStats } from "react-icons/io";
+ import { BsCardHeading } from "react-icons/bs";
 
  const iconMap = {
     FaTag: <FaTag />,
@@ -11,9 +15,7 @@ FaCalendarAlt,FaRoad,FaCogs,FaGasPump,FaPallet,FaDoorClosed,FaIdCard,FaTags
     FaMoneyBillAlt: <FaMoneyBillAlt />,
     FaMoneyBill: <FaMoneyBill />,
     FaCar: <FaCar />,
-    FaCheckCircle: <FaCheckCircle />,
-    FaChargingStation: <FaChargingStation />,
-    FaIndustry: <FaIndustry />,
+    FaQuestion : <FaQuestion  />,
     FaCarSide: <FaCarSide />,
     FaCalendarAlt: <FaCalendarAlt />,
     FaRoad: <FaRoad />,
@@ -22,7 +24,14 @@ FaCalendarAlt,FaRoad,FaCogs,FaGasPump,FaPallet,FaDoorClosed,FaIdCard,FaTags
     FaPallet: <FaPallet />,
     FaDoorClosed: <FaDoorClosed />,
     FaIdCard: <FaIdCard />,
-    FaTags: <FaTags />
+    FaTags: <FaTags />,
+    MdOutlineDriveFileRenameOutline : <MdOutlineDriveFileRenameOutline />,
+    GiSteeringWheel : <GiSteeringWheel />,
+    SiCoronaengine : <SiCoronaengine />,
+    BiSolidCylinder : <BiSolidCylinder />,
+    IoIosStats : <IoIosStats />,
+    BsCardHeading: <BsCardHeading />
+    
 };
 
 function IconField({icon}){

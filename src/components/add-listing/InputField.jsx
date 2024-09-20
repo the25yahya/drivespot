@@ -2,10 +2,11 @@ import React from 'react'
 import { Input } from "@/components/ui/input"
 
 
-function InputField({item,HandleInputChange}) {
+function InputField({item,HandleInputChange,carInfo}) {
   return (
     <div>
         <Input
+         defaultValue={carInfo?.[item.name]}
          type={item?.fieldType} 
          name={item?.name} 
          required={item?.required} 

@@ -6,7 +6,7 @@
             "fieldType":"text",
             "required":true,
             "column":2,
-            "icon":"FaClipboradList"
+            "icon":"MdOutlineDriveFileRenameOutline"
         },
         {
             "label":"Tag Line",
@@ -21,7 +21,7 @@
             "fieldType":"text",
             "required":true,
             "column":2,
-            "icon":"FaClipboradList"
+            "icon":"FaMoneyBill"
         },
         {
             "label":"Selling Price",
@@ -29,7 +29,7 @@
             "fieldType":"text",
             "required":true,
             "column":2,
-            "icon":"FaClipboradList"
+            "icon":"FaMoneyBillAlt"
         },
         {
             "label":"Brand",
@@ -37,7 +37,7 @@
             "fieldType":"text",
             "required":true,
             "column":1,
-            "icon":"FaClipboradList"
+            "icon":"GiSteeringWheel"
         },
         {
             "label":"Year",
@@ -45,28 +45,28 @@
             "fieldType":"number",
             "required":true,
             "column":2,
-            "icon":"FaClipboradList"
+            "icon":"FaCalendarAlt"
         },
         {
             "label":"Engine Size",
             "name":"engineSize",
             "fieldType":"text",
             "column":2,
-            "icon":"FaClipboradList"
+            "icon":"SiCoronaengine"
         },
         {
             "label":"Cylinder",
             "name":"cylinder",
             "fieldType":"text",
             "column":2,
-            "icon":"FaClipboradList"
+            "icon":"BiSolidCylinder"
         },
         {
             "label":"Mileage",
             "name":"mileage",
             "fieldType":"number",
             "column":2,
-            "icon":"FaClipboradList"
+            "icon":"FaGasPump"
         },
         {
             "label":"Condition",
@@ -75,7 +75,7 @@
             "options":["bad","acceptable","good","great","new"],
             "column":2,
             "required":true,
-            "icon":"FaClipboradList"
+            "icon":"IoIosStats"
         },
         {
             "label":"Type",
@@ -84,7 +84,7 @@
             "options":["suv","sport car","electric car","sedan","hatchback","truck","convertible"],
             "column":2,
             "required":true,
-            "icon":"FaClipboradList"
+            "icon":"FaQuestion"
         },
         {
             "label":"Fuel Type",
@@ -93,7 +93,7 @@
             "fieldType":"dropdown",
             "options":["Gasoline","Diesel","electric"],
             "column":2,
-            "icon":"FaClipboradList"
+            "icon":"FaGasPump"
         },
         {
             "label":"Color",
@@ -109,7 +109,7 @@
             "name":"vin",
             "fieldType":"text",
             "column":1,
-            "icon":"FaClipboradList"
+            "icon":"BsCardHeading"
         },
         {
             "label":"Listing Description",

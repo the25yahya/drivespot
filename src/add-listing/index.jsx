@@ -44,10 +44,8 @@ function AddListing() {
     .innerJoin(CarImgs,eq(CarListing.id,CarImgs.CarListingId))
     .where(eq(CarListing.id,id))
     const resp=Service.FormatResult(result)
-    setCarEditInfo(resp[0]);
-    console.log(carEditInfo);
-    
-    
+    setCarEditInfo(resp[0]);  
+    setFeaturesData(resp[0].features);     
   }
 
   const HandleInputChange = (name,value) =>{
@@ -67,11 +65,10 @@ function AddListing() {
 
   const onSubmit = async(e)=>{
     setLoader(true)
-    toast('Please Wait while the server is proccessing your request ...')
     e.preventDefault()
     if (mode=='edit') {
-      if (formRef.current.checkValidity()) {
         try{
+          toast('Please Wait while the server is proccessing your request ...')
           const result = await db.update(CarListing).set({
             ...formData,
             createdBy:user.primaryEmailAddress?.emailAddress,
@@ -86,13 +83,10 @@ function AddListing() {
           console.log("ERROR INSERTING DATA",e);
     
         }
-      }else {
-        alert("Form is invalid. Please correct the errors and try again.");
-      }
-
     }else{
       if (formRef.current.checkValidity()) {
         try{
+          toast('Please Wait while the server is proccessing your request ...')
           const result = await db.insert(CarListing).values({
             ...formData,
             createdBy:user.primaryEmailAddress?.emailAddress,
@@ -108,6 +102,7 @@ function AddListing() {
         }
       }else {
         alert("Form is invalid. Please correct the errors and try again.");
+        setLoader(false)
       }
     }
     
@@ -121,20 +116,20 @@ function AddListing() {
         <form ref={formRef} action="" className='p-10 border rounded-xl mt-10'>
           <div>
             <h2 className='text-2xl font-medium mb-6'>Car Details</h2>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-5 px-10'>
+            <div className='grid grid-cols-1 lg:grid-cols-2 gap-5 px-10'>
               {addlisting.carDetails.map((item,index)=>{return(
-                                <div key={item.name || index}>
-                                <label className='mb-2 font-semibold' htmlFor="">
+                              <div className='' key={item.name || index}>
+                                <label className='mb-2 font-semibold flex items-center gap-1' htmlFor="">
                                     <IconField icon={item?.icon} />
-                                    {item.label} {item.required && <span className='text-red-500'>*</span>}
+                                    {item.label} {item.required && <span className='text-red-500 text-lg'>*</span>}
                                 </label>
                                 {
                                   item.fieldType === 'text' || item.fieldType === 'number' ? (
-                                    <InputField HandleInputChange={HandleInputChange} item={item} />
+                                    <InputField HandleInputChange={HandleInputChange} item={item} carInfo={carEditInfo} />
                                   ) : item.fieldType === 'dropdown' ? (
-                                    <DropDown HandleInputChange={HandleInputChange} item={item} />
+                                    <DropDown HandleInputChange={HandleInputChange} item={item} carInfo={carEditInfo} />
                                   ) : item.fieldType === 'textarea' ? (
-                                    <TextArea HandleInputChange={HandleInputChange} item={item} />
+                                    <TextArea HandleInputChange={HandleInputChange} item={item} carInfo={carEditInfo} />
                                   ) : null
                                 }
                               </div>
@@ -149,7 +144,7 @@ function AddListing() {
                   {addlisting.features.map((item,index)=>{
                     return(
                       <div className='flex items-center gap-2 my-1' key={index}>
-                        <Checkbox onCheckedChange={(value)=>HandleFeaturesChange(item.name,value)
+                        <Checkbox checked={featuresData?.[item.name]} onCheckedChange={(value)=>HandleFeaturesChange(item.name,value)
                         } />
                         <h2>{item.label}</h2>
                       </div>

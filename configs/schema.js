@@ -28,5 +28,24 @@ export const CarImgs = pgTable('CarImgs',{
 })
 
 export const carInventory = pgTable('carInventory',{
+    id: serial('id').primaryKey(),
+    price: numeric('price').notNull(),
+    name: varchar('name').notNull(),
+    brand: varchar('brand').notNull(),
+    type: text('type').notNull(), 
+    fuelType: text('fuelType').notNull(), 
+    cylinder: varchar('cylinder'),
+    mileage: integer('mileage'),
+    engineSize: text('engineSize'),
+    features:json('features'),
+    description: text('description'),
+    color: text('color').notNull(), 
+    year: integer('year').notNull(),
 
+})
+
+export const carInventoryImgs = pgTable('carInventoryImgs',{
+    id: serial('id').primaryKey(),
+    imageUrl: varchar('imageUrl').notNull(),
+    CarInventoryId: integer('CarInventoryId').notNull().references(()=>carInventory.id) 
 })

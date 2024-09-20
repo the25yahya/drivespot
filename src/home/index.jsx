@@ -11,7 +11,7 @@ import cars from '../data/cars.json'
 import { IoLogOutOutline } from "react-icons/io5";
 import BuildDeal from '../components/home/BuildDeal'
 import Footer from '../components/Footer'
-
+import { FaMedal } from "react-icons/fa";
 
 function App() {
   return (
@@ -46,17 +46,25 @@ function App() {
         <div className='my-20 flex flex-wrap items-center justify-center gap-10'>
           {cars.map((car)=>{
             return(
-              <CarComponent
-              key = {car.name}
-              brand = {car.brand}
-              name = {car.name}
-              img = {car.img}
-              id = {car.id}
-              price = {car.price}
-              type = {car.type}
-              tag = {car.tag}
-              />
-            )
+              <div className='border rounded-lg shadow-lg w-fit p-4'>
+              <div className='w-full flex justify-between items-start'>
+                  <div className='text-start'>
+                      <h2 className='font-bold text-lg'>{car.name}</h2>
+                      <p className='font-semibold text-gray-400'>{car.type}</p>
+                  </div>
+                  <img className='cropped-image w-8 mt-1' src={car.brand} alt="" />
+              </div>
+              <div className='cursor-pointer  h-[215px] w-72'>
+                  <img className='cropped-image' src={car.img} alt="" />
+              </div>
+              <div className='flex justify-between items-center'>
+                  <div className='text-sm gap-1 flex items-center py-1 px-2 rounded-lg bg-red-100 text-red-900'>
+                      <p><FaMedal/></p>
+                      <p>{car.tag?car.tag:'New'}</p>
+                  </div>
+                  <p className='text-lg font-bold'>${car.price}</p>
+              </div>
+         </div>)
           })}
         </div>
         <div className='w-full grid place-items-center mt-10'>
