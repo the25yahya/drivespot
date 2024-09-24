@@ -8,6 +8,7 @@ import Profile from './profile/index.jsx'
 import AddListing from './add-listing/index.jsx'
 import { Toaster } from "@/components/ui/sonner"
 import Search from './search/index.jsx'
+import { ContextProvider, useStateContext } from './Context/ContextProvide.jsx'
 
 const router = createBrowserRouter([
   {
@@ -36,9 +37,11 @@ if (!PUBLISHABLE_KEY) {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl='/'>
-      <RouterProvider router={router} />
-      <Toaster />
-    </ClerkProvider>
+    <ContextProvider>
+        <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl='/'>
+          <RouterProvider router={router} />
+          <Toaster />
+        </ClerkProvider>
+    </ContextProvider>
   </StrictMode>,
 )

@@ -9,7 +9,7 @@ function SearchCars() {
 
   const [carList,setCarList] = useState([])
   const getCarListingDetail = async() => {
-    const result =await db.select().from(carInventory)
+    const result =await db.select().from(carInventory).where(eq(carInventory.brand,'Tesla'))
     .innerJoin(carInventoryImgs,eq(carInventory.id,carInventoryImgs.CarInventoryId))
     const resp=Service.FormatResultInventory(result)
     setCarList(resp);

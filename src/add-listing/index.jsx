@@ -158,6 +158,7 @@ function AddListing() {
                setLoader={(v)=>{setLoader(v);navigate('/profile')}} 
                triggerUploadImage={triggerUploadImage}
                carEditInfo={carEditInfo}
+               mode={mode}
                />
             </div>
 
