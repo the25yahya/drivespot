@@ -1,5 +1,7 @@
 import React from 'react'
 import img from '../assets/footer.png'
+import { Link } from 'react-router-dom'
+
 function Footer() {
   return (
     <footer className=' border-t shadow-lg py-8 mt-20 bg-slate-100'>
@@ -8,15 +10,15 @@ function Footer() {
             <h1 className='text-4xl font-bold'>
                 <span className='block'>Buy and Sell cars.</span><span className='text-indigo-900'>Best Online Platform</span>
             </h1>
-            <button className='my-10 rounded-lg text-lg bg-indigo-900 hover:bg-transparent text-white hover:text-indigo-900 transition px-4 py-2'>Get started</button>
+           <Link to={'/search'}><button className='my-10 rounded-lg text-lg bg-indigo-900 hover:bg-transparent text-white hover:text-indigo-900 transition px-4 py-2'>Get started</button></Link>
             <img className='w-[600px]' src={img} alt="" />
         </div>
         <div className='flex gap-10'>
             <div>
                 <h4 className='font-bold text-lg text-indigo-900 mb-8'>Buy & Sell</h4>
-                <p className='font-semibold opacity-60 mt-2'>New Cars</p>
-                <p className='font-semibold opacity-60 mt-2'>Used cars</p>
-                <p className='font-semibold opacity-60 mt-2'>Sell Cars</p>
+                <Link to={'/search'}><p className='font-semibold opacity-60 mt-2'>New Cars</p></Link>
+                <Link to={'/search'}><p className='font-semibold opacity-60 mt-2'>Used cars</p></Link>
+                <Link to='/add-listing'><p className='font-semibold opacity-60 mt-2'>Sell Cars</p></Link>
             </div>
             <div>
                 <h4 className='font-bold text-lg text-indigo-900 mb-8'>Products</h4>

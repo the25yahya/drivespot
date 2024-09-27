@@ -7,7 +7,7 @@ import { useStateContext } from '@/Context/ContextProvide'
 
 function Filter({showFilter}) {
 
-   const {filters,setFilters,handleBrandChange,handleCategoryChange,handleYearChange} = useStateContext()
+   const {isUsed,setUsed,setUnused,filters,clearFilters,handleBrandChange,handleCategoryChange,handleYearChange} = useStateContext()
 
 
     const [brands,setBrands] = useState(false); 
@@ -19,14 +19,14 @@ function Filter({showFilter}) {
     <div className={showFilter?'bg-white min-w-72 border-gray-400 pt-4 overflow-y-scroll max-h-screen pb-40':'bg-white hidden min-w-72 border-gray-400 pt-4 overflow-y-scroll max-h-screen pb-40'}>
         <div className='flex items-center justify-between px-4'>
             <h4 className='font-bold'>Filter</h4>
-            <p className='text-indigo-800 font-bold'>Reset</p>
+            <p onClick={()=>clearFilters()} className='text-indigo-800 font-bold cursor-pointer'>Reset</p>
         </div>
         <Separator className='mt-4'/>
         <div className='my-6 px-4'>
             <h4 className='font-bold mb-4'>Car type</h4>
             <div className='w-full flex items-center justify-center gap-2'>
-                <button className='border-indigo-900 border px-3 py-2 rounded text-sm'>New Car</button>
-                <button className='border-indigo-900 border px-3 py-2 rounded text-sm'>Used Car</button>
+                <button onClick={setUnused} className={isUsed=='unused'?'border-indigo-900 border px-3 py-2 rounded text-sm bg-indigo-900 text-white':'border-indigo-900 border px-3 py-2 rounded text-sm'}>New Car</button>
+                <button onClick={setUsed}  className={isUsed=='used'?'border-indigo-900 border px-3 py-2 rounded text-sm bg-indigo-900 text-white':'border-indigo-900 border px-3 py-2 rounded text-sm'}>Used Car</button>
             </div>
         </div>
         <div className='px-4 my-4'>

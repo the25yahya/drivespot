@@ -60,7 +60,7 @@ function SearchCars() {
     getCarListingDetail()
   },[filters])
   return (
-    <div className='p-4 overflow-scroll max-h-screen'>
+    <div className='p-4 overflow-scroll max-h-screen w-screen'>
         <div>
             <h4 className='text-xl font-bold mb-8'>{carList.length} Cars Found</h4>
         </div>

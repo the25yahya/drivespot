@@ -7,8 +7,10 @@ import {
     SelectValue,
   } from "@/components/ui/select"
 import { Brands } from '@/data/carfilter'
+import { useStateContext } from '@/Context/ContextProvide'
 
 function Brand(props) {
+    const {handleBrandChange} = useStateContext()
   return (
                     <Select>
                         <SelectTrigger className="w-[120px] h-[40px bg-white border-none]">
@@ -17,7 +19,9 @@ function Brand(props) {
                         <SelectContent>
                             {Brands.map((item)=>{
                                 return(
-                                    <SelectItem key={item.id} value={item.Brand}>{item.Brand}</SelectItem>
+                                    <div key={item.id}>
+                                        <SelectItem value={item.Brand}>{item.Brand}</SelectItem>
+                                    </div>
                                 )
                             })}
                         </SelectContent>

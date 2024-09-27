@@ -69,7 +69,9 @@ function App() {
           })}
         </div>
         <div className='w-full grid place-items-center mt-10'>
-            <button className='bg-indigo-900 text-lg flex rounded-lg items-center gap-2 text-white px-4 py-1 hover:bg-transparent hover:text-indigo-900 transition'>Discover All Cars <IoLogOutOutline/></button>
+            <Link to={'/search'}>
+              <button className='bg-indigo-900 text-lg flex rounded-lg items-center gap-2 text-white px-4 py-1 hover:bg-transparent hover:text-indigo-900 transition'>Discover All Cars <IoLogOutOutline/></button>
+            </Link>
         </div>
       </div>
       <BuildDeal />

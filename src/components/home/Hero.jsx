@@ -4,7 +4,7 @@ import Brand from '../ui/carfilter/Brand';
 import Yearfilter from '../ui/carfilter/Year';
 import Monthlydebt from '../ui/carfilter/Monthlydebt';
 import DownPayement from '../ui/carfilter/DownPayement';
-import Countryfilter from '../ui/carfilter/Country';
+import TypeFilter from '../ui/carfilter/Type';
 import { Link } from 'react-router-dom';
 import { MdChevronRight } from "react-icons/md";
 
@@ -23,7 +23,7 @@ function Hero() {
                 <div className='flex items-center gap-3 my-4'>
                     <Brand />
                     <Yearfilter />
-                    <Countryfilter />
+                    <TypeFilter />
                 </div>
                 <div className='flex items-center gap-3 my-4'>
                     <Monthlydebt/>

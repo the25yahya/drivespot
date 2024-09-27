@@ -6,6 +6,10 @@ export const ContextProvider = ({children})=>{
     /////////////////////////// filter side bar and search filters logic/////////////////////////
     const [filters,setFilters] = useState([])
 
+    const clearFilters = ()=>{
+        setFilters([]);
+        window.location.reload()
+    }
 
     // Handle brand change
     const handleBrandChange = (brand) => {
@@ -62,8 +66,17 @@ export const ContextProvider = ({children})=>{
         setFilters((prev) => ({ ...prev, priceRange: priceRange }));
       };
 
+    const [isUsed,setIsUsed] = useState('')
+
+    const setUnused = ()=>{
+        setIsUsed('unused')
+    }
+    const setUsed = ()=>{
+        setIsUsed('used')
+    }
+
     return(
-        <StateContext.Provider value={{filters,setFilters,handleBrandChange,handleCategoryChange,handleYearChange}}>
+        <StateContext.Provider value={{isUsed,setUsed,setUnused,filters,clearFilters,handleBrandChange,handleCategoryChange,handleYearChange}}>
             {children}
         </StateContext.Provider>
     )

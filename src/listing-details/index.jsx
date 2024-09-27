@@ -47,7 +47,7 @@ function ListingDetails() {
 
     // Check if data is loaded before rendering
     if (!listingState[0]) {
-        return <div>Loading...</div>;
+        return <div className='grid place-items-center'>Loading...</div>;
     }
 
     console.log(listingState);

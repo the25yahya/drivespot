@@ -46,23 +46,23 @@ const Price = [
     }
 ]
 
-const Country = [
+const Type = [
     {
         id:1,
-        Country : 'Country'
+        Type : 'Sedan'
     },
     {
         id:2,
-        Country : 'Country'
+        Type : 'Suv'
     },    {
         id:3,
-        Country : 'Country'
+        Type : 'Hatchback'
     },    {
         id:4,
-        Country : 'Country'
+        Type : 'Truck'
     },    {
         id:5,
-        Country : 'Country'
+        Type : 'Sport'
     }
 ]
 
@@ -85,4 +85,4 @@ const Year = [
     }
 ]
 
-export {Brands,Price,Year,Country};
+export {Brands,Price,Year,Type};
