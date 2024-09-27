@@ -3,8 +3,11 @@ import { FaCar,FaHeart } from "react-icons/fa";
 import { GiRoad } from "react-icons/gi";
 import { BsFuelPump } from "react-icons/bs";
 import '../../components/search/carsearch.css'
+import { Link } from 'react-router-dom';
+
 function CarComponent(props) {
   return (
+    <Link to={'/listing-details/'+props.name}>
         <div className='border font-mono rounded-lg shadow-lg w-fit bg-white'>
             <div className='px-4 flex justify-between items-center'>
                 <div className='flex items-center mt-4 gap-1'>
@@ -13,8 +16,8 @@ function CarComponent(props) {
                 </div>
                 <FaHeart/>
             </div>
-            <div className='px-10'>
-                <img className='w-52 h-32 my-4 cropped-image cursor-pointer' src={props.img} alt="" />
+            <div className='grid place-items-center w-[300px]'>
+                <img className='w-full h-44 my-4 cropped-image cursor-pointer' src={props.img} alt="" />
             </div>
             <div className='px-2'>
                 <p className='text-lg text-gray-400'>{props.brand}</p>
@@ -34,6 +37,7 @@ function CarComponent(props) {
                 </div>
             </div>
        </div>
+    </Link>
   )
 }
 

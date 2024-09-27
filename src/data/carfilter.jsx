@@ -9,7 +9,23 @@ const Brands = [
     },
     {
         id : 3,
-        Brand : 'Dacia'
+        Brand : 'Hyuandai'
+    },
+    {
+        id : 4,
+        Brand : 'Ford'
+    },
+    {
+        id : 5,
+        Brand : 'Tesla'
+    },
+    {
+        id : 6,
+        Brand : 'Toyota'
+    },
+    {
+        id : 7,
+        Brand : 'Mercedes'
     }
 ]
 

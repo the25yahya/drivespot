@@ -1,22 +1,22 @@
 [
     {
         "id": 1,
-        "type": "suv",
+        "type": "Suv",
         "img": "https://cdn-icons-png.flaticon.com/128/3097/3097137.png"
     },
     {
         "id": 2,
-        "type": "electric",
+        "type": "Electric",
         "img": "https://cdn-icons-png.flaticon.com/128/4564/4564336.png"
     },
     {
         "id": 3,
-        "type": "sport",
+        "type": "Sport",
         "img": "https://cdn-icons-png.flaticon.com/128/2736/2736933.png"
     },
     {
         "id": 4,
-        "type": "convertible",
+        "type": "Convertible",
         "img": "https://cdn-icons-png.flaticon.com/128/2736/2736840.png"
     },
     {
@@ -26,12 +26,12 @@
     },
     {
         "id": 6,
-        "type": "hatchback",
+        "type": "Hatchback",
         "img":"https://cdn-icons-png.flaticon.com/128/7281/7281655.png"
     },
     {
         "id": 7,
-        "type":"truck",
+        "type":"Truck",
         "img": "https://cdn-icons-png.flaticon.com/128/819/819438.png"
     }
 ]

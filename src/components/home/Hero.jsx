@@ -5,7 +5,7 @@ import Yearfilter from '../ui/carfilter/Year';
 import Monthlydebt from '../ui/carfilter/Monthlydebt';
 import DownPayement from '../ui/carfilter/DownPayement';
 import Countryfilter from '../ui/carfilter/Country';
-
+import { Link } from 'react-router-dom';
 import { MdChevronRight } from "react-icons/md";
 
 function Hero() {
@@ -35,12 +35,14 @@ function Hero() {
                     <p className='text-white font-semibold'>102.123.123</p>
                     <p className='opacity-80'>CARS LISTED</p>
                 </div>
-                <button className='flex items-center'>
-                    <span className='mb-1'>Search Now</span><span><MdChevronRight /></span>
-                </button>
+                <Link to='/search'>
+                    <button className='flex items-center'>
+                        <span className='mb-1'>Search Now</span><span><MdChevronRight /></span>
+                    </button>
+                </Link>
             </div>
             <div className='mt-4'>
-                <p className='flex items-center gap-2'><span>Want to search more customized?</span><span className='underline flex items-center mb-1 cursor-pointer'>Advanced Search <MdChevronRight/></span></p>
+                <p className='flex items-center gap-2'><span>Want to search more customized?</span><Link to='/search'><span className='underline flex items-center mb-1 cursor-pointer'>Advanced Search <MdChevronRight/></span></Link></p>
             </div>
         </div>
     </div>

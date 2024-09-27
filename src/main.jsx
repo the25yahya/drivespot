@@ -9,6 +9,7 @@ import AddListing from './add-listing/index.jsx'
 import { Toaster } from "@/components/ui/sonner"
 import Search from './search/index.jsx'
 import { ContextProvider, useStateContext } from './Context/ContextProvide.jsx'
+import ListingDetails from './listing-details/index.jsx'
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path:'/search',
     element: <Search />
+  },
+  {
+    path:'/listing-details/:id',
+    element: <ListingDetails />
   }
 ])
 

@@ -12,6 +12,7 @@ import { IoLogOutOutline } from "react-icons/io5";
 import BuildDeal from '../components/home/BuildDeal'
 import Footer from '../components/Footer'
 import { FaMedal } from "react-icons/fa";
+import { Link } from 'react-router-dom'
 
 function App() {
   return (
@@ -44,9 +45,9 @@ function App() {
           </div>
         </div>
         <div className='my-20 flex flex-wrap items-center justify-center gap-10'>
-          {cars.map((car)=>{
+          {cars.map((car,index)=>{
             return(
-              <div className='border rounded-lg shadow-lg w-fit p-4'>
+              <div key={index} className='border rounded-lg shadow-lg w-fit p-4'>
               <div className='w-full flex justify-between items-start'>
                   <div className='text-start'>
                       <h2 className='font-bold text-lg'>{car.name}</h2>
