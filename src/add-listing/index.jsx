@@ -72,6 +72,8 @@ function AddListing() {
           const result = await db.update(CarListing).set({
             ...formData,
             createdBy:user.primaryEmailAddress?.emailAddress,
+            userName: user.fullName,
+            userImageUrl: user.imageUrl,
             features:featuresData
           }).where(eq(CarListing.id,id)).returning({id:CarListing.id})
           if (result){

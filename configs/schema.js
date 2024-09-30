@@ -3,6 +3,8 @@ import { pgTable, serial, text, integer, varchar, numeric, boolean, json } from 
 export const CarListing = pgTable('carListing',{
     id: serial('id').primaryKey(),
     createdBy: varchar('createdBy').notNull(),
+    userName: varchar('userName').notNull().default('unknown'),
+    userImageUrl : varchar('userImageUrl'),
     listingTitle: varchar('listingTitle').notNull(),
     tagLine: varchar('tagLine'),
     originalPrice: numeric('originalPrice').notNull(),
@@ -18,7 +20,8 @@ export const CarListing = pgTable('carListing',{
     color: text('color').notNull(), 
     vin: varchar('vin'),
     listingDescription: text('listingDescription'),
-    features:json('features')
+    features:json('features'),
+    tag: varchar('tag').default('used')
 })
 
 export const CarImgs = pgTable('CarImgs',{
@@ -41,6 +44,7 @@ export const carInventory = pgTable('carInventory',{
     description: text('description'),
     color: text('color').notNull(), 
     year: integer('year').notNull(),
+    tag: varchar('tag').default('new')
 
 })
 

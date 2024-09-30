@@ -2,17 +2,19 @@ import React, { useEffect, useState } from 'react';
 import Header from '@/components/home/Header';
 import { useParams } from 'react-router-dom';
 import { db } from '../../configs';
-import { eq } from 'drizzle-orm';
-import { carInventory, carInventoryImgs } from '../../configs/schema';
+import { eq,and } from 'drizzle-orm';
+import { carInventory, carInventoryImgs,CarListing,CarImgs } from '../../configs/schema';
 import Service from '@/data/Service';
 import { IoIosPricetag } from "react-icons/io";
 import { FaCar } from "react-icons/fa";
-import { FaRoad,FaRegCalendarAlt,FaCheck   } from "react-icons/fa";
+import { FaRoad,FaRegCalendarAlt,FaCheck,FaSpinner   } from "react-icons/fa";
 import { LuFuel } from "react-icons/lu";
 import { SiCoronaengine } from "react-icons/si";
 import { BiCylinder } from "react-icons/bi";
 import { IoMdColorPalette } from "react-icons/io";
 import FinanceCalculator from '@/components/listing-details-page/FinanceCalculator';
+import { useLocation } from 'react-router-dom';
+import { useUser } from '@clerk/clerk-react';
 import {
     Carousel,
     CarouselContent,
@@ -20,24 +22,49 @@ import {
     CarouselNext,
     CarouselPrevious,
   } from "@/components/ui/carousel"
-  
+import OwnerDetails from '@/components/listing-details-page/OwnerDetails';  
+
 
 function ListingDetails() {
+    const {user} = useUser()
     const { id } = useParams();
     const [listingState, setListingState] = useState([]);
+    const location = useLocation()
+    const queryParams = new URLSearchParams(location.search);
+
+    const isused = queryParams.get('isused');
 
     const fetchListingDetails = async () => {
-        try {
-            let query = db.select()
-                .from(carInventory)
-                .innerJoin(carInventoryImgs, eq(carInventory.id, carInventoryImgs.CarInventoryId))
-                .where(eq(carInventory.name, id));
-            
-            const result = await query;
-            const resp = Service.FormatResultInventory(result);
-            setListingState(resp);
-        } catch (error) {
-            console.error("Error fetching listing details:", error);
+        if (isused==='new') {
+            try {
+                let query = db.select()
+                    .from(carInventory)
+                    .innerJoin(carInventoryImgs, eq(carInventory.id, carInventoryImgs.CarInventoryId))
+                    .where(eq(carInventory.id, id));
+                
+                const result = await query;
+                const resp = Service.FormatResultInventory(result);
+                setListingState(resp);
+            } catch (error) {
+                console.error("Error fetching listing details:", error);
+            }
+        }else if(isused==='used'){
+            try {
+                let query = db.select()
+                    .from(CarListing)
+                    .innerJoin(CarImgs, eq(CarListing.id, CarImgs.CarListingId))
+                    .where(
+                        and(
+                            eq(CarListing.id, id),
+                            eq(CarListing.createdBy, user?.primaryEmailAddress.emailAddress)
+                        )
+                    );
+                const result = await query;
+                const resp = Service.FormatResult(result);
+                setListingState(resp);
+            } catch (error) {
+                console.error("Error fetching listing details:", error);
+            }
         }
     };
 
@@ -47,37 +74,36 @@ function ListingDetails() {
 
     // Check if data is loaded before rendering
     if (!listingState[0]) {
-        return <div className='grid place-items-center'>Loading...</div>;
+        return <div className='grid place-items-center h-screen'><FaSpinner className='animate-spin text-3xl' /></div>;
     }
 
-    console.log(listingState);
     return (
         <div>
             <Header />
             <div className='p-32'>
                 <div className='pl-32 mb-8'>
-                    <h1 className='text-4xl'>{listingState[0].name}</h1>
+                    <h1 className='text-4xl'>{listingState[0].name||listingState[0].listingTitle}</h1>
                     <p className='font-bold text-lg'>{listingState[0].brand}</p>
                 </div>
                 <div className='flex flex-wrap px-20 justify-center gap-32'>
                     <div className='w-[500px]'>
                         <Carousel>
                         <CarouselContent>
-                            {listingState[0].images.map((img)=>{
+                            {listingState[0].images.map((img,index)=>{
                                 return(
-                                    <CarouselItem><img className='w-[500px]' src={img.imageUrl} alt="" /></CarouselItem>
+                                    <CarouselItem key={index}><img className='w-[500px]' src={img.imageUrl} alt="" /></CarouselItem>
                                 )
                             })}
                         </CarouselContent>
                         <CarouselPrevious />
                         <CarouselNext />
                         </Carousel>
-                        <div>
+                        <div className='my-4'>
                             <h3 className='font-semibold'>Description</h3>
                             <p>{listingState[0].description}</p>
                         </div>
                         <div className='border border-gray-300 p-4 mt-10'>
-                            <h3 className='font-semibold'>Features</h3>
+                            <h3 className='font-semibold my-4'>Features</h3>
                             <div>
                             {listingState[0].features && typeof listingState[0].features === 'object' ? (
                                 Object.entries(listingState[0].features).map(([feature, isAvailable], index) => (
@@ -95,7 +121,7 @@ function ListingDetails() {
                     <div>
                         <div className='border text-center border-gray-300 px-10 py-6 shadow-lg rounded-lg'>
                             <p>Our Price</p>
-                            <p className='text-2xl font-bold my-2'>${listingState[0].price}</p>
+                            <p className='text-2xl font-bold my-2'>${listingState[0].price||listingState[0].sellingPrice}</p>
                             <button className='flex items-center gap-1 bg-indigo-800 text-white px-4 py-1 rounded-sm'>
                                 <IoIosPricetag />
                                 <p>Make An offer price</p>
@@ -167,6 +193,7 @@ function ListingDetails() {
                                 </div>
                             </div>
                         </div>
+                        <OwnerDetails />
                     </div>
                 </div>
             </div>

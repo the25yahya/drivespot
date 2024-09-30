@@ -23,8 +23,6 @@ export const ContextProvider = ({children})=>{
             : [...(prev.brand || []), brand], // Add the brand if not selected
         };
         });
-        console.log('filters: ',filters);
-        
     };
 
     // Handle category change
@@ -39,8 +37,7 @@ export const ContextProvider = ({children})=>{
             : [...(prev.category || []), category], // Add the category if not selected
         };
         });
-        console.log('filters: ',filters);
-        
+
     };
 
     // Handle Year change
@@ -58,13 +55,21 @@ export const ContextProvider = ({children})=>{
                     : [...(prev.year || []), yearInt], // Add the year if not selected
             };
         });
-        console.log('filters: ',filters);
     };
 
 
-    const handlePriceRangeChange = (priceRange) => {
-        setFilters((prev) => ({ ...prev, priceRange: priceRange }));
-      };
+    // Handle Price Range change
+    const handlePriceRangeChange = (min, max) => {
+        setFilters((prev) => {
+            const isPriceRangeSelected = prev.priceRange?.min === min && prev.priceRange?.max === max;
+            return {
+                ...prev,
+                priceRange: isPriceRangeSelected
+                    ? null // Deselect the range if already selected
+                    : { min, max }, // Select the new range
+            };
+        });
+    };
 
     const [isUsed,setIsUsed] = useState('')
 
@@ -76,7 +81,8 @@ export const ContextProvider = ({children})=>{
     }
 
     return(
-        <StateContext.Provider value={{isUsed,setUsed,setUnused,filters,clearFilters,handleBrandChange,handleCategoryChange,handleYearChange}}>
+        <StateContext.Provider value={{isUsed,setUsed,setUnused,filters,clearFilters
+        ,handleBrandChange,handleCategoryChange,handleYearChange,handlePriceRangeChange}}>
             {children}
         </StateContext.Provider>
     )

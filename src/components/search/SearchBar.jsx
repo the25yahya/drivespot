@@ -6,6 +6,7 @@ import '../../search/input.css'
 import { db } from '../../../configs';
 import { carInventory,carInventoryImgs,CarImgs,CarListing } from '../../../configs/schema';
 import { useStateContext } from '@/Context/ContextProvide';
+import { eq } from 'drizzle-orm';
 
 function SearchBar({ toggleFilter }) {
   const [searchTerm, setSearchTerm] = useState('')

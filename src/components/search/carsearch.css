@@ -1,4 +1,3 @@
 .cropped-image {
-    object-fit: cover;
-    width: 100%; /* Crops the image to fit the container while preserving aspect ratio */
+    object-fit: cover; /* Crops the image to fit the container while preserving aspect ratio */
 }

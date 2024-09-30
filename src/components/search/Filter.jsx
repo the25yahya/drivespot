@@ -1,13 +1,15 @@
 import React,{useState} from 'react'
 import { Checkbox } from '@/components/ui/checkbox'
 import { FaAngleDown,FaAngleUp } from "react-icons/fa6";
-import { Slider } from "@/components/ui/slider"
+import { FaChevronRight } from "react-icons/fa";
 import { Separator } from '../ui/separator';
 import { useStateContext } from '@/Context/ContextProvide'
 
 function Filter({showFilter}) {
 
-   const {isUsed,setUsed,setUnused,filters,clearFilters,handleBrandChange,handleCategoryChange,handleYearChange} = useStateContext()
+   const {isUsed,setUsed,setUnused,filters,
+    clearFilters,handleBrandChange,
+    handlePriceRangeChange,handleCategoryChange,handleYearChange} = useStateContext()
 
 
     const [brands,setBrands] = useState(false); 
@@ -207,13 +209,67 @@ function Filter({showFilter}) {
                         onCheckedChange={() => handleYearChange(2020)}  />
             </div>
         </div>
+        <Separator />
         <div>
             <h4 className='font-bold m-4'>Price Range</h4>
-            <Slider className='w-60 ml-2 mt-2' defaultValue={[33]} max={100} step={1} />
-            <div className='flex justify-center gap-1 mt-4'>
-                <button className='border border-indigo-800 w-24 py-1 rounded'>$0</button>
-                <div>-</div>
-                <button className='border border-indigo-800 w-24 py-1 rounded'>$1.000.000</button>
+            <div className='flex items-center justify-between px-3 mt-4'>
+                <div  className='flex justify-center gap-1'>
+                    <button className='border border-indigo-800 w-20 py-1 rounded text-sm'>$1k</button>
+                    <div>-</div>
+                    <button className='border border-indigo-800 w-20 py-1 rounded text-sm'>$5k</button>
+                </div>
+                <div>
+                <Checkbox
+                        onClick={() => handlePriceRangeChange(1000, 5000)}
+                        checked={filters.priceRange?.min === 1000 && filters.priceRange?.max === 5000}
+                        />
+                </div>
+            </div>
+            <div className='flex items-center justify-between px-3 mt-4'>
+                <div  className='flex justify-center gap-1'>
+                    <button className='border border-indigo-800 w-20 py-1 rounded text-sm'>$5k</button>
+                    <div>-</div>
+                    <button className='border border-indigo-800 w-20 py-1 rounded text-sm'>$10k</button>
+                </div>
+                <div>
+                <Checkbox
+                        onClick={() => handlePriceRangeChange(5000, 10000)}
+                        checked={filters.priceRange?.min === 5000 && filters.priceRange?.max === 10000}
+                        />
+                </div>
+            </div>
+            <div className='flex items-center justify-between px-3 mt-4'>
+                <div  className='flex justify-center gap-1'>
+                    <button className='border border-indigo-800 w-20 py-1 rounded text-sm'>$10k</button>
+                    <div>-</div>
+                    <button className='border border-indigo-800 w-20 py-1 rounded text-sm'>$50k</button>
+                </div>
+                <div>
+                <Checkbox
+                        onClick={() => handlePriceRangeChange(10000, 50000)}
+                        checked={filters.priceRange?.min === 10000 && filters.priceRange?.max === 50000}
+                        />
+                </div>
+            </div>
+            <div className='flex items-center justify-between px-3 mt-4'>
+                <div  className='flex justify-center gap-1'>
+                    <button className='border border-indigo-800 w-20 py-1 rounded text-sm'>$50k</button>
+                    <div>-</div>
+                    <button className='border border-indigo-800 w-20 py-1 rounded text-sm'>$100k</button>
+                </div>
+                <div>
+                <Checkbox
+                        onClick={() => handlePriceRangeChange(50000, 100000)}
+                        checked={filters.priceRange?.min === 50000 && filters.priceRange?.max === 100000}
+                        />
+                </div>
+            </div>
+            <div className='flex items-center justify-between mt-4 px-3'>
+                <button className='border w-[180px] justify-center border-indigo-800 py-1 rounded flex items-center'><FaChevronRight/> $100k</button>
+                <Checkbox
+                        onClick={() => handlePriceRangeChange(100000, 'none')}
+                        checked={filters.priceRange?.min === 100000 && filters.priceRange?.max ==='none'}
+                        />
             </div>
         </div>
     </div>

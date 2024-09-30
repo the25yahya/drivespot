@@ -17,7 +17,7 @@ function Header() {
         setDropDown(prevState => !prevState)  // Properly toggling the state
     }
   return (
-    <nav className='fixed w-full bg-white flex items-center justify-between p-6 shadow-sm'>
+    <nav className='z-10 fixed w-full bg-white flex items-center justify-between p-6 shadow-sm'>
         <Link to='/'><Logo /></Link>
         <ul className='hidden md:flex items-center gap-8'>
             <Link to='/'><li className='font-semibold hover:opacity-50 transition cursor-pointer'>Home</li></Link>

@@ -64,6 +64,7 @@
         {
             "label":"Mileage",
             "name":"mileage",
+            "required":true,
             "fieldType":"number",
             "column":2,
             "icon":"FaGasPump"

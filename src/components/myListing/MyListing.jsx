@@ -92,9 +92,11 @@ function MyListing() {
                     return(
                         <div className='m-4' key={index}>
                             <CarComponent name={car.name||car.listingTitle}
-                            img={car.images[0].imageUrl}
+                            img={car.images[0]?.imageUrl}
                             price={car.price || car.sellingPrice}
                             type={car.type}
+                            tag={car.tag}
+                            id={car.id}
                             brand={car.brand}
                             fuelType={car.fuelType}
                             mileage={car.mileage} />
