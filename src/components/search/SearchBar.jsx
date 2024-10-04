@@ -4,7 +4,7 @@ import { LuSettings2 } from "react-icons/lu";
 import { BiSortDown } from "react-icons/bi";
 import '../../search/input.css'
 import { db } from '../../../configs';
-import { carInventory,carInventoryImgs,CarImgs,CarListing } from '../../../configs/schema';
+import { carInventory,carInventoryImgs } from '../../../configs/schema';
 import { useStateContext } from '@/Context/ContextProvide';
 import { eq } from 'drizzle-orm';
 

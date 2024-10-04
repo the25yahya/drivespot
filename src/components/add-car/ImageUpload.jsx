@@ -3,7 +3,7 @@ import { MdCloudUpload } from "react-icons/md";
 import { IoMdCloseCircle } from "react-icons/io";
 import { storage } from '../../../configs/firebaseConfig';
 import { uploadBytes,ref, getDownloadURL } from 'firebase/storage';
-import { CarImgs } from '../../../configs/schema';
+import { carSellerImgs } from '../../../configs/schema';
 import { db } from '../../../configs'
 import { eq } from 'drizzle-orm';
 
@@ -47,8 +47,7 @@ function ImageUpload({triggerUploadImage,setLoader,carEditInfo,mode}) {
     }
 
     const RemoveImageDb = async(image,index)=>{
-        const result = await db.delete(CarImgs).where((eq(CarImgs.imageUrl,image)))  
-             
+        const result = await db.delete(carSellerImgs).where((eq(carSellerImgs.imageUrl,image)))  
     }
 
 
@@ -73,9 +72,9 @@ function ImageUpload({triggerUploadImage,setLoader,carEditInfo,mode}) {
             console.log('Download URL:', downloadUrl);
       
             // Insert into database
-            await db.insert(CarImgs).values({
+            await db.insert(carSellerImgs).values({
               imageUrl: downloadUrl,
-              CarListingId: triggerUploadImage,
+              carSellerId: triggerUploadImage,
             });
             console.log("Image saved successfully to DB.");
           } catch (error) {

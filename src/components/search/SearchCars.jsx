@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import CarComponent from '../ui/CarComponent'
-import { carInventory, carInventoryImgs,CarListing,CarImgs } from '../../../configs/schema'
+import { carInventory, carInventoryImgs,carSeller,carSellerImgs } from '../../../configs/schema'
 import Service from '@/data/Service'
 import { db } from '../../../configs/index'
 import { eq,inArray,gt, desc,and,gte,lte } from 'drizzle-orm'
@@ -12,10 +12,7 @@ function SearchCars() {
 
   const {user} = useUser()
 
-  const {filters,setFilters,isUsed} = useStateContext();
-  console.log('isused :',isUsed);
-  
-
+  const {filters,isUsed} = useStateContext();
   const [carList,setCarList] = useState([])
 
   const getCarListingDetail = async() => {
@@ -29,7 +26,6 @@ function SearchCars() {
     }
     
     if (filters.type) {
-      console.log('Applying type filter:', filters.type); // Log type filter
       query = query.where(eq(carInventory.type, filters.type));
     }
   
@@ -65,16 +61,10 @@ function SearchCars() {
 
   const getCarListingSellerDetails = async () => {
     try {
-      const result = await db
-        .select()
-        .from(CarListing)
-        .leftJoin(CarImgs, eq(CarListing.id, CarImgs.CarListingId))
-        // Add filtering to target specific records
-        .where(eq(CarListing.createdBy, user?.primaryEmailAddress.emailAddress))
-        .orderBy(desc(CarListing.id));  // Optional, but helpful for sorting
+      let query = db.select().from(carSeller)
+      .innerJoin(carSellerImgs, eq(carSeller.id, carSellerImgs.carSellerId));
   
-      console.log('Raw result from CarListing and CarImgs:', result);
-  
+      const result = await query
       const resp = Service.FormatResult(result);
       console.log('Formatted response:', resp);
   
@@ -88,25 +78,18 @@ function SearchCars() {
   
   useEffect(()=>{
     if (isUsed ==='used') {
-      getCarListingSellerDetails()
-      console.log(carList);     
+      getCarListingSellerDetails()  
     }else if (isUsed ==='unused') {
       getCarListingDetail()
-      console.log('carlist:',carList);
     }else{
       getCarListingDetail()
     }
   },[filters,isUsed])
   
   useEffect(()=>{
-    console.log(carList);
-    
+
   },[carList])
 
-  useEffect(()=>{
-    console.log(filters);
-    
-  },[filters])
   return (
     <div className='p-10 pb-40 overflow-scroll max-h-screen w-screen'>
         <div>

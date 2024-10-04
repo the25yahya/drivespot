@@ -1,16 +1,18 @@
+import axios from "axios";
+
 const FormatResult = (resp) =>{
   let result = [];
   let finalResult = [];
   resp.forEach((item)=>{
-    const listingId = item.carListing?.id;
-    if (!result[listingId]) {
-      result[listingId]={
-        car:item.carListing,
+    const SellerId = item.carSeller?.id;
+    if (!result[SellerId]) {
+      result[SellerId]={
+        car:item.carSeller,
         images:[]
       }
     }
-    if (item.CarImgs) {
-      result[listingId].images.push(item.CarImgs)
+    if (item.CarSellerImgs) {
+      result[SellerId].images.push(item.CarSellerImgs)
     }
   })
 
@@ -48,7 +50,42 @@ const FormatResultInventory = (resp) =>{
   return finalResult
 }
 
+const CreateSendbirdUser = (userID,nickname,profileURL) =>{
+  console.log('user id :',userID);
+  console.log('nickname :',nickname);
+  console.log('profile url :',profileURL);
+  
+  
+  
+  return axios.post(`https://api-${import.meta.env.VITE_SENDBIRD_APP_ID}.sendbird.com/v3/users`,{
+    user_id:userID,
+    nickname:nickname,
+    profile_url:profileURL,
+    issue_access_token:false
+  },{
+    headers:{
+      'Content-Type':"application/json",
+      'Api-Token':import.meta.env.VITE_SENDBIRD_API_KEY
+    }
+  })
+}
+
+const CreateSendbirdChannel = async(users,name)=>{
+  return await axios.post(`POST https://api-${import.meta.env.VITE_SENDBIRD_APP_ID}.sendbird.com/v3/group_channels`,{
+    user_ids:users,
+    is_distinct:true,
+    name:name
+  },{
+    headers:{
+      'Content-Type':"application/json",
+      'Api-Token':import.meta.env.VITE_SENDBIRD_API_KEY
+    }
+  })
+}
+
 export default {
   FormatResult,
-  FormatResultInventory
+  FormatResultInventory,
+  CreateSendbirdUser,
+  CreateSendbirdChannel
 }

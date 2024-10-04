@@ -5,11 +5,12 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ClerkProvider } from '@clerk/clerk-react'
 import Profile from './profile/index.jsx'
-import AddListing from './add-listing/index.jsx'
+import AddCar from './add-car/index.jsx'
 import { Toaster } from "@/components/ui/sonner"
 import Search from './search/index.jsx'
 import { ContextProvider, useStateContext } from './Context/ContextProvide.jsx'
 import ListingDetails from './listing-details/index.jsx'
+
 
 const router = createBrowserRouter([
   {
@@ -21,8 +22,8 @@ const router = createBrowserRouter([
     element:<Profile />
   },
   {
-    path:'/add-listing',
-    element: <AddListing />
+    path:'/add-car',
+    element: <AddCar />
   },
   {
     path:'/search',

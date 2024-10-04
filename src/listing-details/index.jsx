@@ -3,7 +3,7 @@ import Header from '@/components/home/Header';
 import { useParams } from 'react-router-dom';
 import { db } from '../../configs';
 import { eq,and } from 'drizzle-orm';
-import { carInventory, carInventoryImgs,CarListing,CarImgs } from '../../configs/schema';
+import { carInventory, carInventoryImgs,carSeller,carSellerImgs } from '../../configs/schema';
 import Service from '@/data/Service';
 import { IoIosPricetag } from "react-icons/io";
 import { FaCar } from "react-icons/fa";
@@ -26,7 +26,6 @@ import OwnerDetails from '@/components/listing-details-page/OwnerDetails';
 
 
 function ListingDetails() {
-    const {user} = useUser()
     const { id } = useParams();
     const [listingState, setListingState] = useState([]);
     const location = useLocation()
@@ -50,18 +49,13 @@ function ListingDetails() {
             }
         }else if(isused==='used'){
             try {
-                let query = db.select()
-                    .from(CarListing)
-                    .innerJoin(CarImgs, eq(CarListing.id, CarImgs.CarListingId))
-                    .where(
-                        and(
-                            eq(CarListing.id, id),
-                            eq(CarListing.createdBy, user?.primaryEmailAddress.emailAddress)
-                        )
-                    );
+                let query = db.select().from(carSeller)
+                .innerJoin(carSellerImgs, eq(carSeller.id, carSellerImgs.carSellerId))
+                .where(eq(carSeller.id,id))
                 const result = await query;
                 const resp = Service.FormatResult(result);
                 setListingState(resp);
+   
             } catch (error) {
                 console.error("Error fetching listing details:", error);
             }
@@ -71,6 +65,9 @@ function ListingDetails() {
     useEffect(() => {
         fetchListingDetails();
     }, [id]);
+    useEffect(()=>{
+        console.log(listingState);
+    },[listingState])
 
     // Check if data is loaded before rendering
     if (!listingState[0]) {
@@ -81,17 +78,17 @@ function ListingDetails() {
         <div>
             <Header />
             <div className='p-32'>
-                <div className='pl-32 mb-8'>
+                <div className='mb-8'>
                     <h1 className='text-4xl'>{listingState[0].name||listingState[0].listingTitle}</h1>
                     <p className='font-bold text-lg'>{listingState[0].brand}</p>
                 </div>
                 <div className='flex flex-wrap px-20 justify-center gap-32'>
-                    <div className='w-[500px]'>
+                    <div className='w-[400px] md:w-[500px] lg:w-[700px]'>
                         <Carousel>
                         <CarouselContent>
                             {listingState[0].images.map((img,index)=>{
                                 return(
-                                    <CarouselItem key={index}><img className='w-[500px]' src={img.imageUrl} alt="" /></CarouselItem>
+                                    <CarouselItem key={index}><img src={img?.imageUrl} alt="" /></CarouselItem>
                                 )
                             })}
                         </CarouselContent>
@@ -193,7 +190,11 @@ function ListingDetails() {
                                 </div>
                             </div>
                         </div>
-                        <OwnerDetails />
+                        <OwnerDetails
+                        carDetails={listingState}
+                        ownerImage={listingState[0].userImageUrl}
+                        ownerName={listingState[0].userName}
+                        ownerEmail={listingState[0].createdBy} />
                     </div>
                 </div>
             </div>

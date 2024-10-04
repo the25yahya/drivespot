@@ -1,10 +1,10 @@
 import React from 'react'
 import Header from '@/components/home/Header'
 import { Link } from 'react-router-dom'
-import MyListing from '@/components/myListing/MyListing'
+import MyListing from '@/components/myCars/MyListing'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Separator } from "@/components/ui/separator"
-
+import Inbox from '@/components/myCars/Inbox'
 
 function Profile() {
   return (
@@ -22,7 +22,7 @@ function Profile() {
                 <MyListing />
               </TabsContent>
               <TabsContent value="Inbox">
-                Inbox Tab
+                <Inbox />
               </TabsContent>
               <TabsContent value="Profile">
                 Profile Tab

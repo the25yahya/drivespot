@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Header from '@/components/home/Header'
-import InputField from '@/components/add-listing/InputField'
-import addlisting from '../data/add-listing.json'
-import DropDown from '@/components/add-listing/DropDown'
-import TextArea from '@/components/add-listing/TextArea'
+import InputField from '@/components/add-car/InputField'
+import addlisting from '../data/add-cars.json'
+import DropDown from '@/components/add-car/DropDown'
+import TextArea from '@/components/add-car/TextArea'
 import { Separator } from "@/components/ui/separator"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Await, useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { db } from '../../configs'
-import { CarImgs, CarListing } from '../../configs/schema'
-import IconField from '@/components/add-listing/IconField'
-import ImageUpload from '@/components/add-listing/ImageUpload'
+import { carSellerImgs,carSeller } from '../../configs/schema'
+import IconField from '@/components/add-car/IconField'
+import ImageUpload from '@/components/add-car/ImageUpload'
 import { BiLoaderAlt } from "react-icons/bi";
 import { toast } from 'sonner'
 import { useUser } from '@clerk/clerk-react'
@@ -18,7 +18,7 @@ import { eq } from 'drizzle-orm'
 import Service from '@/data/Service'
 
 
-function AddListing() {
+function AddCar() {
   const {user} = useUser();
   const formRef = useRef(null);
   const [formData,setformData] = useState([]);
@@ -35,14 +35,14 @@ function AddListing() {
 
   useEffect(()=>{
     if (mode=='edit') {
-      getCarListingDetail()
+      getCarSellerDetails()
     }
   },[])
 
-  const getCarListingDetail = async() => {
-    const result =await db.select().from(CarListing)
-    .innerJoin(CarImgs,eq(CarListing.id,CarImgs.CarListingId))
-    .where(eq(CarListing.id,id))
+  const getCarSellerDetails = async() => {
+    const result =await db.select().from(carSeller)
+    .innerJoin(carSellerImgs,eq(carSeller.id,carSellerImgs.carSellerId))
+    .where(eq(carSeller.id,id))
     const resp=Service.FormatResult(result)
     setCarEditInfo(resp[0]);  
     setFeaturesData(resp[0].features);     
@@ -69,13 +69,13 @@ function AddListing() {
     if (mode=='edit') {
         try{
           toast('Please Wait while the server is proccessing your request ...')
-          const result = await db.update(CarListing).set({
+          const result = await db.update(carSeller).set({
             ...formData,
             createdBy:user.primaryEmailAddress?.emailAddress,
             userName: user.fullName,
             userImageUrl: user.imageUrl,
             features:featuresData
-          }).where(eq(CarListing.id,id)).returning({id:CarListing.id})
+          }).where(eq(carSeller.id,id)).returning({id:carSeller.id})
           if (result){
             setLoader(false)
             setTriggerUploadImage(result[0].id);
@@ -89,11 +89,11 @@ function AddListing() {
       if (formRef.current.checkValidity()) {
         try{
           toast('Please Wait while the server is proccessing your request ...')
-          const result = await db.insert(CarListing).values({
+          const result = await db.insert(carSeller).values({
             ...formData,
             createdBy:user.primaryEmailAddress?.emailAddress,
             features:featuresData
-          }).returning({id:CarListing.id});
+          }).returning({id:carSeller.id});
           if (result){
             setLoader(false)
             setTriggerUploadImage(result[0].id);
@@ -114,7 +114,7 @@ function AddListing() {
     <div>
       <Header/>
       <div className='px-10 md:px-20 py-32'>
-        <h2 className='text-4xl font-bold'>Add New Listing</h2>
+        <h2 className='text-4xl font-bold'>Add New Car</h2>
         <form ref={formRef} action="" className='p-10 border rounded-xl mt-10'>
           <div>
             <h2 className='text-2xl font-medium mb-6'>Car Details</h2>
@@ -181,4 +181,4 @@ function AddListing() {
   )
 }
 
-export default AddListing
+export default AddCar

@@ -1,8 +1,8 @@
 {
     "carDetails":[
         {
-            "label":"Listing Title",
-            "name":"listingTitle",
+            "label":"Car name",
+            "name":"name",
             "fieldType":"text",
             "required":true,
             "column":2,
@@ -24,8 +24,8 @@
             "icon":"FaMoneyBill"
         },
         {
-            "label":"Selling Price",
-            "name":"sellingPrice",
+            "label":"Price",
+            "name":"price",
             "fieldType":"text",
             "required":true,
             "column":2,
