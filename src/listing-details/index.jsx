@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '@/components/home/Header';
 import { useParams } from 'react-router-dom';
 import { db } from '../../configs';
-import { eq,and } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { carInventory, carInventoryImgs,carSeller,carSellerImgs } from '../../configs/schema';
 import Service from '@/data/Service';
 import { IoIosPricetag } from "react-icons/io";
